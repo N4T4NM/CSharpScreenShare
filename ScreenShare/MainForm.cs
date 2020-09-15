@@ -60,14 +60,18 @@ namespace ScreenShare
                 picture.Anchor = ImageHolderPanel.Anchor;
                 picture.Size = ImageHolderPanel.Size;
                 picture.SizeMode = PictureBoxSizeMode.StretchImage;
+
                 //add input handlers
                 picture.MouseDown += HandleScreenClick;
                 picture.MouseUp += HandleScreenUnclick;
                 picture.MouseMove += HandleScreenMove;
+                picture.MouseEnter += delegate { Cursor.Hide(); };
+                picture.MouseLeave += delegate { Cursor.Show(); };
                 
                 //add picturebox to panel
                 ImageHolderPanel.Controls.Clear();
                 ImageHolderPanel.Controls.Add(picture);
+                picture.Focus();
 
                 try
                 {
@@ -85,6 +89,8 @@ namespace ScreenShare
                 //add disconnect handler
                 client.ClientDisconnected += HandleDisconnected;
                 ConnectButton.Text = "Disconnect";
+                IPBox.Enabled = false;
+                ShareScreenButton.Enabled = false;
             } else
             {
                 //close connection
@@ -93,6 +99,8 @@ namespace ScreenShare
                 //remove picture and change connect button
                 ImageHolderPanel.Controls.Clear();
                 ConnectButton.Text = "Connect";
+                IPBox.Enabled = true;
+                ShareScreenButton.Enabled = true;
             }
         }
 
@@ -104,16 +112,13 @@ namespace ScreenShare
             {
                 ImageHolderPanel.Controls.Clear();
                 ConnectButton.Text = "Connect";
+                IPBox.Enabled = true;
+                ShareScreenButton.Enabled = true;
             }));
         }
 
-        bool holding = false;
         private void HandleScreenMove(object sender, MouseEventArgs e)
         {
-            //check if is holding to avoid sending useless input
-            if (!holding)
-                return;
-
             //get move input data
             BinaryFormatter formatter = new BinaryFormatter();
             InputData data = new InputData();
@@ -141,7 +146,6 @@ namespace ScreenShare
 
             //send serialized input
             formatter.Serialize(client.stream, data);
-            holding = true;
         }
         private void HandleScreenUnclick(object sender, MouseEventArgs e)
         {
@@ -157,7 +161,6 @@ namespace ScreenShare
 
             //send serialized input
             formatter.Serialize(client.stream, data);
-            holding = false;
         }
 
         private void MainForm_KeyDown(object sender, KeyEventArgs e)
@@ -165,6 +168,10 @@ namespace ScreenShare
             //avoid infinite input loops
             if (client == null || server != null)
                 return;
+
+            //avoid local window from receiving this input
+            e.SuppressKeyPress = true;
+            e.Handled = true;
 
             //get key down input data
             BinaryFormatter formatter = new BinaryFormatter();
@@ -180,9 +187,14 @@ namespace ScreenShare
 
         private void MainForm_KeyUp(object sender, KeyEventArgs e)
         {
+
             //avoid infinite input loops
             if (client == null || server != null)
                 return;
+
+            //avoid local window from receiving this input
+            e.SuppressKeyPress = true;
+            e.Handled = true;
 
             //get key down input data
             BinaryFormatter formatter = new BinaryFormatter();
@@ -194,6 +206,13 @@ namespace ScreenShare
 
             //send serialized input
             formatter.Serialize(client.stream, data);
+        }
+
+        private void ConnectButton_KeyUp(object sender, KeyEventArgs e)
+        {
+            //prevent user from selecting disconnect button using keyboard
+            if (client != null)
+                client._pic.Focus();
         }
     }
 }

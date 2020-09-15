@@ -49,7 +49,6 @@ namespace ScreenShare.Server
                 {
                     //get screenshot and send
                     formatter.Serialize(stream, ScreenUtils.GetScreen());
-                    Thread.Sleep(5);
                 }
             } catch (Exception ex)
             {
@@ -90,28 +89,24 @@ namespace ScreenShare.Server
         {
             //convert position between resolutions
             Point parsed = ScreenUtils.TranslatePosition(input.MouseX, input.MouseY, input.CurrentSize);
+
             //handle mouse input
             switch(ActionType)
             {
                 case ActionType.MouseButtonDown:
-                    HandleMouseDown(parsed, input.MouseButton);
+                    HandleMouseDown(input.MouseButton);
                     break;
                 case ActionType.MouseButtonUp:
                     HandleMouseUp(input.MouseButton);
                     break;
                 case ActionType.MouseDrag:
-                    if (!holding)
-                        break;
                     Cursor.Position = parsed;
                     break;
             }
         }
-        bool holding = false;
-        private void HandleMouseDown(Point Loc, MouseButtons Butt)
+        private void HandleMouseDown(MouseButtons Butt)
         {
             //handle mouse down
-            Cursor.Position = Loc;
-            Thread.Sleep(100);
             switch(Butt)
             {
                 case MouseButtons.Left:
@@ -121,7 +116,6 @@ namespace ScreenShare.Server
                     inputSimulator.Mouse.RightButtonDown();
                     break;
             }
-            holding = true;
         }
         private void HandleMouseUp(MouseButtons Butt)
         {
@@ -135,7 +129,6 @@ namespace ScreenShare.Server
                     inputSimulator.Mouse.RightButtonUp();
                     break;
             }
-            holding = false;
         }
         #endregion
         #region KeyboardActions

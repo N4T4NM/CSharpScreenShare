@@ -29,11 +29,11 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.IPBox = new System.Windows.Forms.TextBox();
             this.ConnectButton = new System.Windows.Forms.Button();
             this.ShareScreenButton = new System.Windows.Forms.Button();
             this.ImageHolderPanel = new System.Windows.Forms.Panel();
-            this.IPBox = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -51,6 +51,24 @@
             this.panel1.Size = new System.Drawing.Size(719, 42);
             this.panel1.TabIndex = 0;
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.label1.ForeColor = System.Drawing.Color.White;
+            this.label1.Location = new System.Drawing.Point(87, 3);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(17, 13);
+            this.label1.TabIndex = 3;
+            this.label1.Text = "IP";
+            // 
+            // IPBox
+            // 
+            this.IPBox.Location = new System.Drawing.Point(87, 16);
+            this.IPBox.Name = "IPBox";
+            this.IPBox.Size = new System.Drawing.Size(152, 20);
+            this.IPBox.TabIndex = 2;
+            // 
             // ConnectButton
             // 
             this.ConnectButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -62,6 +80,7 @@
             this.ConnectButton.Text = "Connect";
             this.ConnectButton.UseVisualStyleBackColor = true;
             this.ConnectButton.Click += new System.EventHandler(this.ConnectButton_Click);
+            this.ConnectButton.KeyUp += new System.Windows.Forms.KeyEventHandler(this.ConnectButton_KeyUp);
             // 
             // ShareScreenButton
             // 
@@ -84,24 +103,6 @@
             this.ImageHolderPanel.Name = "ImageHolderPanel";
             this.ImageHolderPanel.Size = new System.Drawing.Size(719, 465);
             this.ImageHolderPanel.TabIndex = 1;
-            // 
-            // IPBox
-            // 
-            this.IPBox.Location = new System.Drawing.Point(87, 16);
-            this.IPBox.Name = "IPBox";
-            this.IPBox.Size = new System.Drawing.Size(152, 20);
-            this.IPBox.TabIndex = 2;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(87, 3);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(17, 13);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "IP";
             // 
             // MainForm
             // 
