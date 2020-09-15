@@ -65,7 +65,7 @@ namespace ScreenShare
                 picture.MouseDown += HandleScreenClick;
                 picture.MouseUp += HandleScreenUnclick;
                 picture.MouseMove += HandleScreenMove;
-                picture.MouseEnter += delegate { Cursor.Hide(); };
+                picture.MouseEnter += delegate { if(MouseInputBox.Checked) Cursor.Hide(); };
                 picture.MouseLeave += delegate { Cursor.Show(); };
                 
                 //add picturebox to panel
@@ -119,6 +119,10 @@ namespace ScreenShare
 
         private void HandleScreenMove(object sender, MouseEventArgs e)
         {
+            //check if send input is enabled
+            if (!MouseInputBox.Checked)
+                return;
+
             //get move input data
             BinaryFormatter formatter = new BinaryFormatter();
             InputData data = new InputData();
@@ -134,6 +138,10 @@ namespace ScreenShare
 
         private void HandleScreenClick(object sender, MouseEventArgs e)
         {
+            //check if send input is enabled
+            if (!MouseInputBox.Checked)
+                return;
+
             //get mouse down input data
             BinaryFormatter formatter = new BinaryFormatter();
             InputData data = new InputData();
@@ -149,6 +157,10 @@ namespace ScreenShare
         }
         private void HandleScreenUnclick(object sender, MouseEventArgs e)
         {
+            //check if send input is enabled
+            if (!MouseInputBox.Checked)
+                return;
+
             //get mouse up input data
             BinaryFormatter formatter = new BinaryFormatter();
             InputData data = new InputData();
@@ -165,6 +177,10 @@ namespace ScreenShare
 
         private void MainForm_KeyDown(object sender, KeyEventArgs e)
         {
+            //check if send input is enabled
+            if (!KeyboardInputBox.Checked)
+                return;
+
             //avoid infinite input loops
             if (client == null || server != null)
                 return;
@@ -187,6 +203,9 @@ namespace ScreenShare
 
         private void MainForm_KeyUp(object sender, KeyEventArgs e)
         {
+            //check if send input is enabled
+            if (!KeyboardInputBox.Checked)
+                return;
 
             //avoid infinite input loops
             if (client == null || server != null)
@@ -211,6 +230,20 @@ namespace ScreenShare
         private void ConnectButton_KeyUp(object sender, KeyEventArgs e)
         {
             //prevent user from selecting disconnect button using keyboard
+            if (client != null)
+                client._pic.Focus();
+        }
+
+        private void KeyboardInputBox_Enter(object sender, EventArgs e)
+        {
+            //prevent user from selecting checkbox using keyboard
+            if (client != null)
+                client._pic.Focus();
+        }
+
+        private void MouseInputBox_Enter(object sender, EventArgs e)
+        {
+            //prevent user from selecting checkbox using keyboard
             if (client != null)
                 client._pic.Focus();
         }

@@ -34,6 +34,8 @@
             this.ConnectButton = new System.Windows.Forms.Button();
             this.ShareScreenButton = new System.Windows.Forms.Button();
             this.ImageHolderPanel = new System.Windows.Forms.Panel();
+            this.MouseInputBox = new System.Windows.Forms.CheckBox();
+            this.KeyboardInputBox = new System.Windows.Forms.CheckBox();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -42,6 +44,8 @@
             this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.panel1.Controls.Add(this.KeyboardInputBox);
+            this.panel1.Controls.Add(this.MouseInputBox);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.IPBox);
             this.panel1.Controls.Add(this.ConnectButton);
@@ -104,6 +108,38 @@
             this.ImageHolderPanel.Size = new System.Drawing.Size(719, 465);
             this.ImageHolderPanel.TabIndex = 1;
             // 
+            // MouseInputBox
+            // 
+            this.MouseInputBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.MouseInputBox.AutoSize = true;
+            this.MouseInputBox.Checked = true;
+            this.MouseInputBox.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.MouseInputBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.MouseInputBox.ForeColor = System.Drawing.Color.White;
+            this.MouseInputBox.Location = new System.Drawing.Point(405, 20);
+            this.MouseInputBox.Name = "MouseInputBox";
+            this.MouseInputBox.Size = new System.Drawing.Size(126, 19);
+            this.MouseInputBox.TabIndex = 4;
+            this.MouseInputBox.Text = "Send Mouse Input";
+            this.MouseInputBox.UseVisualStyleBackColor = true;
+            this.MouseInputBox.Enter += new System.EventHandler(this.MouseInputBox_Enter);
+            // 
+            // KeyboardInputBox
+            // 
+            this.KeyboardInputBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.KeyboardInputBox.AutoSize = true;
+            this.KeyboardInputBox.Checked = true;
+            this.KeyboardInputBox.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.KeyboardInputBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.KeyboardInputBox.ForeColor = System.Drawing.Color.White;
+            this.KeyboardInputBox.Location = new System.Drawing.Point(567, 20);
+            this.KeyboardInputBox.Name = "KeyboardInputBox";
+            this.KeyboardInputBox.Size = new System.Drawing.Size(140, 19);
+            this.KeyboardInputBox.TabIndex = 5;
+            this.KeyboardInputBox.Text = "Send Keyboard Input";
+            this.KeyboardInputBox.UseVisualStyleBackColor = true;
+            this.KeyboardInputBox.Enter += new System.EventHandler(this.KeyboardInputBox_Enter);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -130,6 +166,8 @@
         private System.Windows.Forms.Panel ImageHolderPanel;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox IPBox;
+        private System.Windows.Forms.CheckBox MouseInputBox;
+        private System.Windows.Forms.CheckBox KeyboardInputBox;
     }
 }
 
